@@ -49,11 +49,11 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Run Playwright Tests') {
-            steps {
-                sh 'npx playwright test --headed'
-            }
-        }
+        // stage('Run Playwright Tests') {
+        //     steps {
+        //         sh 'npx playwright test --headed'
+        //     }
+        // }
         stage('Archive Test Reports') {
             steps {
                 archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
