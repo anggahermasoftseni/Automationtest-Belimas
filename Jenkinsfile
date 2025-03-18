@@ -17,25 +17,24 @@ pipeline {
                 bat 'dir'                              // List file dan folder (Windows)
             }
         }
-        stage('Install Node.js') {
+        stage('Install Node.js and Playwright') {
             steps {
-                bat 'curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -'
-                bat 'sudo apt-get install -y nodejs'
+                // Cek versi Node.js
                 bat 'node -v'
                 bat 'npm -v'
+        
+                // Install Playwright
+                bat 'npm install -g playwright'
+                bat 'npx playwright install'
             }
         }
         stage('Check Environment Details') {
             steps {
-                echo "Current Location: ${pwd()}"
-                bat 'echo Node.js Version:'
-                bat 'node -v || echo Node.js not found'
-                bat 'echo npm Version:'
-                bat 'npm -v || echo npm not found'
-                bat 'echo Playwright Version:'
-                bat 'npx playwright --version || echo Playwright not found'
-                bat 'echo List of Files in Workspace:'
+                bat 'echo Current Location: %cd%'
                 bat 'dir'
+                bat 'node -v'
+                bat 'npm -v'
+                bat 'npx playwright --version'
             }
         }
         stage('Check Node.js and Playwright Installation') {
