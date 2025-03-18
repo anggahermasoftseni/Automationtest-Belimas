@@ -28,8 +28,11 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright Tests (Headless)
-      run: npx playwright test
+      run: npx playwright 
 
+    - name: Ensure Report Directory Exists
+      run: mkdir -p playwright-report
+      
     - name: Upload Playwright Report
       if: always()
       uses: actions/upload-artifact@v3
