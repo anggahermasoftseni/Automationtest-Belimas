@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/anggahermasoftseni/Automationtest-Belimas.git'
+                git branch: 'main', url: 'https://github.com/anggahermasoftseni/Automationtest-Belimas.git'
             }
         }
         stage('Install Node.js') {
