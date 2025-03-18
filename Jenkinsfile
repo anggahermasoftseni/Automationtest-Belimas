@@ -27,7 +27,8 @@ pipeline {
         }
         stage('Run Playwright Tests') {
             steps {
-                bat 'npx playwright test --reporter=html --output=playwright-report'
+                // Output to both console and file
+                bat 'npx playwright test --reporter="list,html" --output=playwright-report > playwright-report/test-results.txt'
             }
         }
         stage('Archive Test Reports') {
