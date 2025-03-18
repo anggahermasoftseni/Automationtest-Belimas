@@ -1,12 +1,17 @@
 pipeline {
     agent any
-    tools {
-        nodejs 'NodeJS 18'
-    }
     stages {
         stage('Checkout') {
             steps {
                 git 'https://github.com/anggahermasoftseni/Automationtest-Belimas.git'
+            }
+        }
+        stage('Install Node.js') {
+            steps {
+                sh 'curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -'
+                sh 'sudo apt-get install -y nodejs'
+                sh 'node -v'
+                sh 'npm -v'
             }
         }
         stage('Install Dependencies') {
