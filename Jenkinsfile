@@ -1,47 +1,28 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout SCM') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Checkout Code') {
             steps {
                 git url: 'https://github.com/anggahermasoftseni/Automationtest-Belimas.git', branch: 'main'
             }
         }
-        stage('Check Current Location and List Files') {
+        stage('Check Environment') {
             steps {
-                bat 'echo Current Location: %cd%'      // Log lokasi saat ini (Windows)
-                bat 'dir'                              // List file dan folder (Windows)
-            }
-        }
-        stage('Install Node.js and Playwright') {
-            steps {
-                // Cek versi Node.js
                 bat 'node -v'
                 bat 'npm -v'
-        
-                // Install Playwright
-                bat 'npm install'
-                bat 'npx playwright install chromium'
+                bat 'where node'
+                bat 'where npm'
             }
         }
-        stage('Check Environment Details') {
+        stage('Install Dependencies') {
             steps {
-                bat 'echo Current Location: %cd%'
-                bat 'dir'
-                bat 'node -v'
-                bat 'npm -v'
-                bat 'npx playwright --version'
+                bat 'npm ci'  // Pastikan install dependencies dari package-lock.json
             }
         }
-        stage('Check Node.js and Playwright Installation') {
+        stage('Install Playwright') {
             steps {
-                bat 'node -v'  // Cek versi Node.js
-                bat 'npm -v'   // Cek versi npm
-                bat 'npx playwright --version'  // Cek versi Playwright
+                bat 'npm install @playwright/test --save-dev'
+                bat 'npx playwright install'
             }
         }
         stage('Run Playwright Tests') {
