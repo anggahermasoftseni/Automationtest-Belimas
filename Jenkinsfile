@@ -44,16 +44,11 @@ pipeline {
                 bat 'npx playwright --version'  // Cek versi Playwright
             }
         }
-        // stage('Install Dependencies') {
-        //     steps {
-        //         sh 'npm install'
-        //     }
-        // }
-        // stage('Run Playwright Tests') {
-        //     steps {
-        //         sh 'npx playwright test --headed'
-        //     }
-        // }
+        stage('Run Playwright Tests') {
+            steps {
+                sh 'npx playwright test --headed'
+            }
+        }
         stage('Archive Test Reports') {
             steps {
                 archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
