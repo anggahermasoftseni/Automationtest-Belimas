@@ -25,6 +25,19 @@ pipeline {
                 sh 'npm -v'
             }
         }
+        stage('Check Environment Details') {
+            steps {
+                echo "Current Location: ${pwd()}"
+                bat 'echo Node.js Version:'
+                bat 'node -v || echo Node.js not found'
+                bat 'echo npm Version:'
+                bat 'npm -v || echo npm not found'
+                bat 'echo Playwright Version:'
+                bat 'npx playwright --version || echo Playwright not found'
+                bat 'echo List of Files in Workspace:'
+                bat 'dir'
+            }
+        }
         stage('Check Node.js and Playwright Installation') {
             steps {
                 bat 'node -v'  // Cek versi Node.js
