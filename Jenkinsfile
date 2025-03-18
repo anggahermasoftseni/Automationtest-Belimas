@@ -1,9 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/anggahermasoftseni/Automationtest-Belimas.git'
+                checkout scm
+            }
+        }
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/anggahermasoftseni/Automationtest-Belimas.git', branch: 'main'
             }
         }
         stage('Install Node.js') {
