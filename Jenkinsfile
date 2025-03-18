@@ -24,7 +24,7 @@ pipeline {
                 bat 'npm -v'
         
                 // Install Playwright
-                bat 'npm install -g playwright'
+                bat 'npm install'
                 bat 'npx playwright install chromium'
             }
         }
