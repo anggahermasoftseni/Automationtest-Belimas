@@ -11,9 +11,10 @@ pipeline {
                 git url: 'https://github.com/anggahermasoftseni/Automationtest-Belimas.git', branch: 'main'
             }
         }
-        stage('Check File/Folder List - Windows') {
+        stage('Check Current Location and List Files') {
             steps {
-                bat 'dir' // Windows command
+                bat 'echo Current Location: %cd%'      // Log lokasi saat ini (Windows)
+                bat 'dir'                              // List file dan folder (Windows)
             }
         }
         stage('Install Node.js') {
