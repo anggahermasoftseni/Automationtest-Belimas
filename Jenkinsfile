@@ -46,7 +46,9 @@ pipeline {
         }
         stage('Run Playwright Tests') {
             steps {
-                sh 'npx playwright test --headed'
+                bat 'mkdir playwright-report'
+                bat 'npx playwright test --reporter=html --output=playwright-report'
+                bat 'dir playwright-report'
             }
         }
         stage('Archive Test Reports') {
