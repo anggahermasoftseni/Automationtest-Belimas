@@ -25,6 +25,13 @@ pipeline {
                 sh 'npm -v'
             }
         }
+        stage('Check Node.js and Playwright Installation') {
+            steps {
+                bat 'node -v'  // Cek versi Node.js
+                bat 'npm -v'   // Cek versi npm
+                bat 'npx playwright --version'  // Cek versi Playwright
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
