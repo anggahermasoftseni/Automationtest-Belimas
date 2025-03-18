@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Run Playwright Tests') {
             steps {
-                bat 'npx playwright test --headed'
+                sh 'npx playwright test --headed'
             }
         }
         stage('Archive Test Reports') {
