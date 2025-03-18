@@ -25,7 +25,7 @@ pipeline {
         
                 // Install Playwright
                 bat 'npm install -g playwright'
-                bat 'npx playwright install --timeout=90000'
+                bat 'npx playwright install chromium'
             }
         }
         stage('Check Environment Details') {
