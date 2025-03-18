@@ -11,6 +11,11 @@ pipeline {
                 git url: 'https://github.com/anggahermasoftseni/Automationtest-Belimas.git', branch: 'main'
             }
         }
+        stage('Check File/Folder List - Windows') {
+            steps {
+                bat 'dir' // Windows command
+            }
+        }
         stage('Install Node.js') {
             steps {
                 sh 'curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -'
