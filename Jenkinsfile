@@ -8,10 +8,10 @@ pipeline {
         }
         stage('Install Node.js') {
             steps {
-                bat 'curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -'
-                bat 'sudo apt-get install -y nodejs'
-                bat 'node -v'
-                bat 'npm -v'
+                sh 'curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -'
+                sh 'sudo apt-get install -y nodejs'
+                sh 'node -v'
+                sh 'npm -v'
             }
         }
         stage('Install Dependencies') {
