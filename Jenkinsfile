@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Install Playwright') {
             steps {
-                bat 'npm install @playwright/test --save-dev'
+                bat 'npm install -g playwright'
                 bat 'npx playwright install'
             }
         }
