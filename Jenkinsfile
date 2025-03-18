@@ -1,73 +1,45 @@
 pipeline {
     agent any
-    environment {
-        PRETTIER_CMD = 'npx prettier --write'
-    }
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                script {
-                    echo "Checking out the repository..."
-                    checkout scm
-                }
+                git url: 'https://github.com/anggahermasoftseni/Automationtest-Belimas.git', branch: 'main'
             }
         }
-
+        stage('Check Environment') {
+            steps {
+                bat 'node -v'
+                bat 'npm -v'
+                bat 'where node'
+                bat 'where npm'
+            }
+        }
         stage('Install Dependencies') {
             steps {
-                script {
-                    echo "Installing dependencies..."
-                    sh 'npm install'
-                }
+                bat 'npm ci'  // Pastikan install dependencies dari package-lock.json
             }
         }
-
-        stage('Run Tests') {
+        stage('Install Playwright') {
             steps {
-                script {
-                    echo "Running tests..."
-                    sh 'npm run test'
-                }
+                bat 'npm install -g playwright'
+                bat 'npx playwright install'
             }
         }
-
-        stage('Format Code with Prettier') {
+        stage('Run Playwright Tests') {
             steps {
-                script {
-                    echo "Running Prettier to format code..."
-                    sh "$PRETTIER_CMD **/*.js"
-                }
+                // Using 'list' for detailed console output and 'html' for detailed report
+                bat 'set DEBUG=pw:api && npx playwright test --reporter="list,html" --output=playwright-report'
             }
         }
-
-        stage('Deploy') {
+        stage('Archive Test Reports') {
             steps {
-                script {
-                    echo "Deploying the application..."
-                    sh 'npm run deploy'
-                }
-            }
-        }
-
-        stage('Post-Test Cleanup') {
-            steps {
-                script {
-                    echo "Cleaning up after tests..."
-                    // Add any cleanup steps if needed, such as removing temporary files
-                }
+                archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
             }
         }
     }
-
     post {
         always {
-            echo "The pipeline has finished executing."
-        }
-        success {
-            echo "The pipeline executed successfully!"
-        }
-        failure {
-            echo "The pipeline failed, please check the logs for errors."
+            echo 'Build finished!'
         }
     }
 }
