@@ -31,11 +31,11 @@ pipeline {
                 bat 'set DEBUG=pw:api && npx playwright test --reporter="list,html" --output=playwright-report'
             }
         }
-        stage('Archive Test Reports') {
-            steps {
-                archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
-            }
-        }
+        // stage('Archive Test Reports') {
+        //     steps {
+        //         archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
+        //     }
+        // }
     }
     post {
         always {
