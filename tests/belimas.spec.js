@@ -6,7 +6,7 @@ test("TC4.1.0 - Open the web page", async({page}) => {
     await page.goto("/");
 
     // Expect a title to contain "Belimas"
-    await expect(page).toHaveTitle("Belimas - Simba Refinery")
+    await expect(page).toHaveTitle("Belimas - Rimba Refinery")
 } );
 
 test("TC4.1.1 - Login with valid email and correct password", async({page}) => {
