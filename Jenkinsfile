@@ -28,7 +28,7 @@ pipeline {
         stage('Run Playwright Tests') {
             steps {
                 // Using 'list' for detailed console output and 'html' for detailed report
-                bat 'npx playwright test --config=playwright.config.ts'
+                bat 'npx playwright test --config=playwright.config.js'
             }
         }
         // stage('Archive Test Reports') {
